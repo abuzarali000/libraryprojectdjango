@@ -14,8 +14,8 @@ class BookPagination(PageNumberPagination):
 
 class BookFilter(filters.FilterSet):
     """ filter for filtering books by author and language."""
-    author = filters.CharFilter(field_name='author', lookup_expr='icontains')  # Partial match
-    language = filters.CharFilter(field_name='language', lookup_expr='icontains')  # Partial match
+    author = filters.CharFilter(field_name='author', lookup_expr='icontains')
+    language = filters.CharFilter(field_name='language', lookup_expr='icontains')
 
 
     class Meta:
@@ -64,7 +64,7 @@ class BookDetail(APIView):
         try:
             book = Book.objects.get(pk=id)
         except Book.DoesNotExist:
-            raise Http404("Book not found.")
+            raise Http404("Book not found, could not modify data.")
         serializer = BookSerializer(book, data=request.data)
         if serializer.is_valid():
             serializer.save()
