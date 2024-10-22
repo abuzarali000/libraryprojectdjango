@@ -77,6 +77,6 @@ class BookDetail(APIView):
         try:
             book = Book.objects.get(pk=id)
         except Book.DoesNotExist:
-            raise Http404("Book not found.")
+            raise Http404("Book not found, could not delete.")
         book.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
